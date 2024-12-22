@@ -10,6 +10,9 @@ use App\Http\Controllers\ModuleResultController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\UserSkillController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -64,3 +67,21 @@ Route::get('skills/{id}', [SkillController::class, 'show']);
 Route::post('skills', [SkillController::class, 'store']);
 Route::put('skills/{id}', [SkillController::class, 'update']);
 Route::delete('skills/{id}', [SkillController::class, 'destroy']);
+
+Route::get('user-skills', [UserSkillController::class, 'index']);
+Route::get('user-skills/{id}', [UserSkillController::class, 'show']);
+Route::post('user-skills', [UserSkillController::class, 'store']);
+Route::put('user-skills/{id}', [UserSkillController::class, 'update']);
+Route::delete('user-skills/{id}', [UserSkillController::class, 'destroy']);
+
+Route::get('notifications', [NotificationController::class, 'index']);
+Route::get('notifications/{id}', [NotificationController::class, 'show']);
+Route::post('notifications', [NotificationController::class, 'store']);
+Route::put('notifications/{id}', [NotificationController::class, 'update']);
+Route::delete('notifications/{id}', [NotificationController::class, 'destroy']);
+
+Route::get('payments', [PaymentController::class, 'index']);
+Route::get('payments/{id}', [PaymentController::class, 'show']);
+Route::post('payments', [PaymentController::class, 'store']);
+Route::put('payments/{id}', [PaymentController::class, 'update']);
+Route::delete('payments/{id}', [PaymentController::class, 'destroy']);
