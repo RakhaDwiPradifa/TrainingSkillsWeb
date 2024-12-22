@@ -6,6 +6,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\ModuleResultController;
+use App\Http\Controllers\SesiController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SkillController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,11 +21,11 @@ Route::post('users', [UserController::class, 'store']);
 Route::put('users/{id}', [UserController::class, 'update']);
 Route::delete('users/{id}', [UserController::class, 'destroy']);
 
-Route::get('/courses', [CourseController::class, 'index']); // Menampilkan semua kursus
-Route::get('/courses/{id}', [CourseController::class, 'show']); // Menampilkan kursus berdasarkan ID
-Route::post('/courses', [CourseController::class, 'store']); // Menyimpan kursus baru
-Route::put('/courses/{id}', [CourseController::class, 'update']); // Mengupdate kursus
-Route::delete('/courses/{id}', [CourseController::class, 'destroy']); // Menghapus kursus
+Route::get('/courses', [CourseController::class, 'index']); 
+Route::get('/courses/{id}', [CourseController::class, 'show']); 
+Route::post('/courses', [CourseController::class, 'store']); 
+Route::put('/courses/{id}', [CourseController::class, 'update']); 
+Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
 
 // Routes API untuk Modules
 Route::get('modules', [ModuleController::class, 'index']);
@@ -35,3 +39,28 @@ Route::get('enrollments/{id}', [EnrollmentController::class, 'show']);
 Route::post('enrollments', [EnrollmentController::class, 'store']);
 Route::put('enrollments/{id}', [EnrollmentController::class, 'update']);
 Route::delete('enrollments/{id}', [EnrollmentController::class, 'destroy']);
+
+Route::get('module-results', [ModuleResultController::class, 'index']);
+Route::post('module-results', [ModuleResultController::class, 'store']);
+Route::get('module-results/{id}', [ModuleResultController::class, 'show']);
+Route::put('module-results/{id}', [ModuleResultController::class, 'update']);
+Route::delete('module-results/{id}', [ModuleResultController::class, 'destroy']);
+
+// Routes untuk Sesi
+Route::get('sesi', [SesiController::class, 'index']);
+Route::get('sesi/{id}', [SesiController::class, 'show']);  
+Route::post('sesi', [SesiController::class, 'store']);  
+Route::put('sesi/{id}', [SesiController::class, 'update']);  
+Route::delete('sesi/{id}', [SesiController::class, 'destroy']);  
+
+Route::get('reviews', [ReviewController::class, 'index']);
+Route::post('reviews', [ReviewController::class, 'store']);
+Route::get('reviews/{id}', [ReviewController::class, 'show']);
+Route::put('reviews/{id}', [ReviewController::class, 'update']);
+Route::delete('reviews/{id}', [ReviewController::class, 'destroy']);
+
+Route::get('skills', [SkillController::class, 'index']);
+Route::get('skills/{id}', [SkillController::class, 'show']);
+Route::post('skills', [SkillController::class, 'store']);
+Route::put('skills/{id}', [SkillController::class, 'update']);
+Route::delete('skills/{id}', [SkillController::class, 'destroy']);
