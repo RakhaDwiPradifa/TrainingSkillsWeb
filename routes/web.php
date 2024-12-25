@@ -9,7 +9,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', [LandingPageController::class, 'index'])->name('landing.page');
+Route::get('/', [LandingPageController::class, 'index'])->name ('landing.page');
 
 // Login Route
 Route::get('app', [AuthController::class, 'showLoginForm'])->name('app');
