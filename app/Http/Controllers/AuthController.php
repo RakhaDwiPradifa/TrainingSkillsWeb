@@ -42,30 +42,36 @@ class AuthController extends Controller
         ], 201);
     }
 
-// Login pengguna
-public function login(Request $request)
-{
-    // Validasi input
-    $validated = $request->validate([
-        'Email' => 'required|email',
-        'Password' => 'required|string|min:8',
-    ]);
-
-    // Cek kredensial
-    $user = User::where('Email', $validated['Email'])->first();
-
-    if ($user && Hash::check($validated['Password'], $user->getAuthPassword())) {
-        // Kredensial valid, buat token
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Login successful',
-            'token' => $token,
-            'user' => $user,
-        ], 200);
+    // Login pengguna
+    public function login(Request $request)
+    {
+        // Validasi input
+        $validated = $request->validate([
+            'Email' => 'required|email',
+            'Password' => 'required|string|min:8',
+        ]);
+    
+        // Cek kredensial
+        $user = User::where('Email', $validated['Email'])->first();
+    
+        if ($user && Hash::check($validated['Password'], $user->getAuthPassword())) {
+            // Kredensial valid, buat token
+            $token = $user->createToken('auth_token')->plainTextToken;
+    
+            return response()->json([
+                'message' => 'Login successful',
+                'token' => $token,
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->Nama,
+                    'email' => $user->Email,
+                    'role' => $user->Role, // Include the role in the response
+                ],
+            ], 200);
+        }
+    
+        // Kredensial tidak valid
+        return response()->json(['message' => 'Invalid credentials'], 401);
     }
-
-    // Kredensial tidak valid
-    return response()->json(['message' => 'Invalid credentials'], 401);
-}
+    
 }

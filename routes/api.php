@@ -29,10 +29,6 @@ Route::middleware('api')->post('/register', [AuthController::class, 'register'])
 // Route untuk Login
 Route::middleware('api')->post('/login', [AuthController::class, 'login']);
 
-// Routes untuk API Auth
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');

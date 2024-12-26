@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CourseController extends Controller
 {
@@ -17,10 +18,11 @@ class CourseController extends Controller
     // Menampilkan kursus berdasarkan ID
     public function show($id)
     {
-        $course = Course::find($id); // Mencari kursus berdasarkan ID
+        // Mencari kursus berdasarkan ID dengan handle jika tidak ditemukan
+        $course = Course::find($id);
 
         if (!$course) {
-            return response()->json(['message' => 'Course not found'], 404); // Jika kursus tidak ditemukan
+            return response()->json(['message' => 'Course not found'], Response::HTTP_NOT_FOUND); // Jika kursus tidak ditemukan
         }
 
         return response()->json($course); // Mengembalikan data kursus yang ditemukan
@@ -43,7 +45,8 @@ class CourseController extends Controller
         // Membuat kursus baru
         $course = Course::create($validated);
 
-        return response()->json($course, 201); // Mengembalikan data kursus yang baru dibuat
+        // Mengembalikan data kursus yang baru dibuat
+        return response()->json($course, Response::HTTP_CREATED);
     }
 
     // Mengupdate data kursus
@@ -64,7 +67,7 @@ class CourseController extends Controller
         $course = Course::find($id);
 
         if (!$course) {
-            return response()->json(['message' => 'Course not found'], 404); // Jika kursus tidak ditemukan
+            return response()->json(['message' => 'Course not found'], Response::HTTP_NOT_FOUND); // Jika kursus tidak ditemukan
         }
 
         // Mengupdate data kursus
@@ -80,7 +83,7 @@ class CourseController extends Controller
         $course = Course::find($id);
 
         if (!$course) {
-            return response()->json(['message' => 'Course not found'], 404); // Jika kursus tidak ditemukan
+            return response()->json(['message' => 'Course not found'], Response::HTTP_NOT_FOUND); // Jika kursus tidak ditemukan
         }
 
         // Menghapus kursus

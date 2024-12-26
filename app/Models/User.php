@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens; // Tambahkan ini
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -25,7 +25,7 @@ class User extends Authenticatable
         'Alamat',
         'NomorTelepon',
         'TanggalDaftar',
-        'Role',
+        'Role',  // Pastikan 'role' dengan huruf kecil
         'FotoProfil',
     ];
 
@@ -55,5 +55,15 @@ class User extends Authenticatable
     protected $casts = [
         'TanggalLahir' => 'date',
         'TanggalDaftar' => 'datetime',
+        'Role' => 'string',  // Anda bisa menambahkan ini jika diperlukan
     ];
+
+    /**
+     * Check if the user has a specific role.
+     */
+    public function hasRole($role)
+    {
+        return $this->Role === $role;
+    }
 }
+
